@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <osname>BitrixEnv-7-amd64_ext4_img</osname>
+    <tags>centos,linux,unix</tags>
+    <illegal_password_characters>!@#$%^&amp;*()</illegal_password_characters>
+    <limit>
+        <elem name="ipv4">yes</elem>
+        <elem name="ipv6">yes</elem>
+        <elem name="mem">512</elem>
+        <elem name="disk">3300</elem>
+    </limit>
+    <support>
+        <elem version="5.4.0">VMmgr</elem>
+    </support>
+    <hddimage>bitrixenv_7_hdd.image</hddimage>
+    <rebootcount>1</rebootcount>
+    <type>ostemplate</type>
+    <installdrive>install.sh</installdrive>
+    <virtiodisk>yes</virtiodisk>
+    <virtionet>yes</virtionet>
+    <sshpublickey>yes</sshpublickey>
+    <chpasswd_method>mount.linux</chpasswd_method>
+    <date>2021-03-01 15:24:19</date>
+    <install_result>ok</install_result>
+</doc>

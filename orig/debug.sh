@@ -83,6 +83,9 @@ ln -f $GIT_DIR/../IMG_Ubuntu-20.04-amd64/install.sh /nfsshare/IMG_Ubuntu-20.04-a
 
 ln -f $GIT_DIR/../IMG_Debian-10-amd64/metainfo.xml /nfsshare/IMG_Debian-10-amd64/
 ln -f $GIT_DIR/../IMG_Debian-10-amd64/install.sh /nfsshare/IMG_Debian-10-amd64/
+
+ln -f $GIT_DIR/../IMG_BitrixEnv-7-amd64_ext4/metainfo.xml /nfsshare/IMG_BitrixEnv-7-amd64_ext4/
+ln -f $GIT_DIR/../IMG_BitrixEnv-7-amd64_ext4/install.sh /nfsshare/IMG_BitrixEnv-7-amd64_ext4/
 ```
 
 ```bash
