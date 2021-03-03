@@ -72,17 +72,17 @@ git clone https://github.com/YogSottot/vmmanager_os_images/
 cat .git/hooks/post-merge
 #!/bin/sh
 
-ln -f $GIT_DIR/IMG_CentOS-7-amd64_ext4/metainfo.xml /nfsshare/IMG_CentOS-7-amd64_ext4/
-ln -f $GIT_DIR/IMG_CentOS-7-amd64_ext4/install.sh /nfsshare/IMG_CentOS-7-amd64_ext4/
+ln -f $GIT_DIR/../IMG_CentOS-7-amd64_ext4/metainfo.xml /nfsshare/IMG_CentOS-7-amd64_ext4/
+ln -f $GIT_DIR/../IMG_CentOS-7-amd64_ext4/install.sh /nfsshare/IMG_CentOS-7-amd64_ext4/
 
-ln -f $GIT_DIR/IMG_Ubuntu-18.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-18.04-amd64/
-ln -f $GIT_DIR/IMG_Ubuntu-18.04-amd64/install.sh /nfsshare/IMG_Ubuntu-18.04-amd64/
+ln -f $GIT_DIR/../IMG_Ubuntu-18.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-18.04-amd64/
+ln -f $GIT_DIR/../IMG_Ubuntu-18.04-amd64/install.sh /nfsshare/IMG_Ubuntu-18.04-amd64/
 
-ln -f $GIT_DIR/IMG_Ubuntu-20.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-20.04-amd64/
-ln -f $GIT_DIR/IMG_Ubuntu-20.04-amd64/install.sh /nfsshare/IMG_Ubuntu-20.04-amd64/
+ln -f $GIT_DIR/../IMG_Ubuntu-20.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-20.04-amd64/
+ln -f $GIT_DIR/../IMG_Ubuntu-20.04-amd64/install.sh /nfsshare/IMG_Ubuntu-20.04-amd64/
 
-ln -f $GIT_DIR/IMG_Debian-10-amd64/metainfo.xml /nfsshare/IMG_Debian-10-amd64/
-ln -f $GIT_DIR/IMG_Debian-10-amd64/install.sh /nfsshare/IMG_Debian-10-amd64/
+ln -f $GIT_DIR/../IMG_Debian-10-amd64/metainfo.xml /nfsshare/IMG_Debian-10-amd64/
+ln -f $GIT_DIR/../IMG_Debian-10-amd64/install.sh /nfsshare/IMG_Debian-10-amd64/
 ```
 
 ```bash
