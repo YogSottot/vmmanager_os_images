@@ -86,5 +86,6 @@ ln -f $GIT_DIR/../IMG_Debian-10-amd64/install.sh /nfsshare/IMG_Debian-10-amd64/
 ```
 
 ```bash
+# Делаем hook исполняемым
 chmod +x .git/hooks/post-merge
 ```
