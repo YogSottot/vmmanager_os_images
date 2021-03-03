@@ -60,3 +60,19 @@ p
 w
 EOF
 }
+
+# Подключаем файлы в /nfsshare/ к гиту
+```bash
+cd /opt/
+git clone https://github.com/YogSottot/vmmanager_os_images/
+
+ln -f /opt/vmmanager_os_images/IMG_CentOS-7-amd64_ext4/metainfo.xml /nfsshare/IMG_CentOS-7-amd64_ext4/
+ln -f /opt/vmmanager_os_images/IMG_CentOS-7-amd64_ext4/install.sh /nfsshare/IMG_CentOS-7-amd64_ext4/                                    
+
+ln -f /opt/vmmanager_os_images/IMG_Ubuntu-18.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-18.04-amd64/
+ln -f /opt/vmmanager_os_images/IMG_Ubuntu-18.04-amd64/install.sh /nfsshare/IMG_Ubuntu-18.04-amd64/                                                                   
+ln -f /opt/vmmanager_os_images/IMG_Ubuntu-20.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-20.04-amd64/
+ln -f /opt/vmmanager_os_images/IMG_Ubuntu-20.04-amd64/install.sh /nfsshare/IMG_Ubuntu-20.04-amd64/                                                                   
+ln -f /opt/vmmanager_os_images/IMG_Debian-10-amd64/metainfo.xml /nfsshare/IMG_Debian-10-amd64/                                                                       
+ln -f /opt/vmmanager_os_images/IMG_Debian-10-amd64/install.sh /nfsshare/IMG_Debian-10-amd64/ 
+```

@@ -18,6 +18,7 @@
     <installdrive>install.sh</installdrive>
     <virtiodisk>yes</virtiodisk>
     <virtionet>yes</virtionet>
+    <sshpublickey>yes</sshpublickey>
     <chpasswd_method>mount.linux</chpasswd_method>
     <date>2021-03-01 15:24:19</date>
     <install_result>ok</install_result>
