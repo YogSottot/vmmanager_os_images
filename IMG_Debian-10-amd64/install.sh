@@ -206,8 +206,9 @@ EOF
 
 
 # restart network
+# bug 1584682 https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/1584682
+ip addr flush eth0
 systemctl restart networking
-ifup eth0
 
 # edit /etc/networks
 NETWORK=$(echo ($IP) | sed 's/[^.]*$/0/')

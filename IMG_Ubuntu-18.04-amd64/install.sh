@@ -205,6 +205,8 @@ EOF
         #fi
 
 # restart network
+# bug 1584682 https://bugs.launchpad.net/ubuntu/+source/ifupdown/+bug/1584682
+ip addr flush ${ETHDEV}
 systemctl restart networking
 
 # edit /etc/networks
