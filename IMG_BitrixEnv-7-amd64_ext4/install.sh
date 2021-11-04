@@ -228,11 +228,20 @@ cat >> /root/.ssh/authorized_keys << EOF
 EOF
 }
 
+swap_add() {
+dd if=/dev/zero of=/swapfile1 bs=2048 count=524288
+mkswap /swapfile1
+chmod 600 /swapfile1
+swapon /swapfile1
+echo "/swapfile1 none swap sw 0 0" >> /etc/fstab
+}
+
 clean_files
 disk_format
 resize_fs
 echo "($PASS)" | passwd --stdin root
 network_configure
 ssh_keys_add
+swap_add
 wget -q -O /dev/null --no-check-certificate "($FINISH)"
 reboot
