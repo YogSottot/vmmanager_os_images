@@ -236,6 +236,10 @@ swapon /swapfile1
 echo "/swapfile1 none swap sw 0 0" >> /etc/fstab
 }
 
+update_pkgs() {
+yum update -y
+}
+
 clean_files
 disk_format
 resize_fs
@@ -243,5 +247,6 @@ echo "($PASS)" | passwd --stdin root
 network_configure
 ssh_keys_add
 swap_add
+update_pkgs
 wget -q -O /dev/null --no-check-certificate "($FINISH)"
 reboot
