@@ -228,16 +228,11 @@ cat >> /root/.ssh/authorized_keys << EOF
 EOF
 }
 
-update_pkgs() {
-yum update -y
-}
-
 clean_files
 disk_format
 resize_fs
 echo "($PASS)" | passwd --stdin root
 network_configure
 ssh_keys_add
-update_pkgs
 wget -q -O /dev/null --no-check-certificate "($FINISH)"
 reboot
