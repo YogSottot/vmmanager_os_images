@@ -239,9 +239,9 @@ echo "/swapfile1 none swap sw 0 0" >> /etc/fstab
 clean_files
 disk_format
 resize_fs
+swap_add
 echo "($PASS)" | passwd --stdin root
 network_configure
 ssh_keys_add
-swap_add
 wget -q -O /dev/null --no-check-certificate "($FINISH)"
 reboot
