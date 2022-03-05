@@ -20,6 +20,9 @@ yum install -y cloud-utils-growpart bind-utils traceroute bash-completion bash-c
 apt install -y cloud-guest-utils dnsutils traceroute bash-completion nano ncdu net-tools wget byobu locales-all
 ```
 
+Удаляем из ```/etc/sysconfig/network-scripts/ifcfg-eth0```
+опцию ```HWADDR``` и меняем ```NAME``` на ```DEVICE```  
+
 Добавляем команду для запуска скрипта  
 В CentOS 7
 

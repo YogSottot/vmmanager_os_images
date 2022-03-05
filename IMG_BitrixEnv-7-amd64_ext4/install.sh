@@ -126,7 +126,7 @@ if [ -n "($IPv6)" ]; then
 
                 cat > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
 DEVICE="${ETHDEV}"
-BOOTPROTO="static"
+BOOTPROTO=none
 DNS1="($NAMESERVERv6)"
 HWADDR="${HWADDR}"
 NM_CONTROLLED="no"
@@ -159,7 +159,7 @@ fi
 if [ "($NEXTHOPIPv4)" != "" ] && [ "($NEXTHOPIPv4)" != "()" ] && [ "($IP)" != "($IPv6)" ]; then
         cat > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
 DEVICE="${ETHDEV}"
-BOOTPROTO="static"
+BOOTPROTO=none
 HWADDR="${HWADDR}"
 NM_CONTROLLED="no"
 ONBOOT="yes"
@@ -182,10 +182,11 @@ UUID="${UUID}"
 IPADDR="($IP)"
 NETMASK="($NETMASK)"
 GATEWAY="($GATEWAY)"
-BOOTPROTO="static"
+BOOTPROTO=none
 DEVICE="${ETHDEV}"
 ONBOOT="yes"
 IPV6INIT="yes"
+TYPE="Ethernet"
 EOF
 
 fi
@@ -218,7 +219,6 @@ if [ "($NAMESERVERS)" != "" ] && [ "($NAMESERVERS)" != "()" ]; then
 fi
 # DNS end
 
-        #ifup eth0
         systemctl restart network
 }
 

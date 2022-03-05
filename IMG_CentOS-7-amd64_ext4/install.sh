@@ -179,7 +179,6 @@ fi
 if [ "($IP)" != "($IPv6)" ]; then
         cat > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
 DEVICE="${ETHDEV}"
-HWADDR="${HWADDR}"
 UUID="${UUID}"
 IPADDR="($IP)"
 NETMASK="($NETMASK)"
