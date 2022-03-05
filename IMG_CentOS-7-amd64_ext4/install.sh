@@ -96,8 +96,8 @@ EOF
 
 
         ETHDEV=$(ip route show | grep default | grep -Eo 'dev\ .+\ ' | awk '{print $2}'| head -1)
-        HWADDR=$(ip link show ${ETHDEV} | awk '/link\/ether/ {print $2}' | tr [:lower:] [:upper:])
-        UUID=$(uuidgen ${ETHDEV})
+        HWADDR=$(ip link show eth0 | awk '/link\/ether/ {print $2}' | tr [:lower:] [:upper:])
+        UUID=$(uuidgen eth0)
 
 
 if [ "($TMPIPv4)" != "" ] && [ "($TMPIPv4)" != "()" ]; then
@@ -124,8 +124,8 @@ if [ -n "($IPv6)" ]; then
                 echo "NETWORKING=yes" > /etc/sysconfig/network
                 echo "HOSTNAME=($HOSTNAME)" >> /etc/sysconfig/network
 
-                cat > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
-DEVICE="${ETHDEV}"
+                cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
+DEVICE="eth0"
 BOOTPROTO=none
 DNS1="($NAMESERVERv6)"
 HWADDR="${HWADDR}"
@@ -141,7 +141,7 @@ NETWORKING_IPV6=yes
 IPV6_DEFAULTGW=($GATEWAYv6)
 EOF
 
-cat >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
+cat >> /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
 IPV6ADDR="($IPv6)/($NETMASKv6)"
 IPV6INIT="yes"
 IPV6_AUTOCONF="no"
@@ -149,16 +149,16 @@ IPV6_DEFAULTGW="($GATEWAYv6)"
 EOF
 
         if [ "($NEXTHOPIPv6)" != "" ] && [ "($NEXTHOPIPv6)" != "()" ]; then
-                echo "SCOPE=\"peer ($NEXTHOPIPv6)\"" >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}
-                echo "ADDRESS0=0.0.0.0" > /etc/sysconfig/network-scripts/route-${ETHDEV}
-                echo "NETMASK0=0.0.0.0" >> /etc/sysconfig/network-scripts/route-${ETHDEV}
-                echo "GATEWAY0=($NEXTHOPIPv6)" >> /etc/sysconfig/network-scripts/route-${ETHDEV}
+                echo "SCOPE=\"peer ($NEXTHOPIPv6)\"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+                echo "ADDRESS0=0.0.0.0" > /etc/sysconfig/network-scripts/route-eth0
+                echo "NETMASK0=0.0.0.0" >> /etc/sysconfig/network-scripts/route-eth0
+                echo "GATEWAY0=($NEXTHOPIPv6)" >> /etc/sysconfig/network-scripts/route-eth0
         fi
 fi
 
 if [ "($NEXTHOPIPv4)" != "" ] && [ "($NEXTHOPIPv4)" != "()" ] && [ "($IP)" != "($IPv6)" ]; then
-        cat > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
-DEVICE="${ETHDEV}"
+        cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
+DEVICE="eth0"
 BOOTPROTO=none
 HWADDR="${HWADDR}"
 NM_CONTROLLED="no"
@@ -170,15 +170,15 @@ IPADDR=($IP)
 NETMASK=255.255.255.255
 EOF
 
-        echo "SCOPE=\"peer ($NEXTHOPIPv4)\"" >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}
-        echo "ADDRESS0=0.0.0.0" > /etc/sysconfig/network-scripts/route-${ETHDEV}
-        echo "NETMASK0=0.0.0.0" >> /etc/sysconfig/network-scripts/route-${ETHDEV}
-        echo "GATEWAY0=($NEXTHOPIPv4)" >> /etc/sysconfig/network-scripts/route-${ETHDEV}
+        echo "SCOPE=\"peer ($NEXTHOPIPv4)\"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+        echo "ADDRESS0=0.0.0.0" > /etc/sysconfig/network-scripts/route-eth0
+        echo "NETMASK0=0.0.0.0" >> /etc/sysconfig/network-scripts/route-eth0
+        echo "GATEWAY0=($NEXTHOPIPv4)" >> /etc/sysconfig/network-scripts/route-eth0
 fi
 
 if [ "($IP)" != "($IPv6)" ]; then
-        cat > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV} << EOF
-DEVICE="${ETHDEV}"
+        cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
+DEVICE="eth0"
 HWADDR="${HWADDR}"
 UUID="${UUID}"
 IPADDR="($IP)"
@@ -197,25 +197,25 @@ if [ "#${MULTIIP}" = "#true" ]; then
                 ipnum=1
                 IPv4ALIASES="($IPv4ALIASES)"
                 for ipv4alias in ${IPv4ALIASES}; do
-                        echo "DEVICE=${ETHDEV}:${ipnum}" > /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}:${ipnum}
-                        echo "IPADDR=${ipv4alias}" >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}:${ipnum}
-                        echo "NETMASK=255.255.255.255" >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}:${ipnum}
+                        echo "DEVICE=eth0:${ipnum}" > /etc/sysconfig/network-scripts/ifcfg-eth0:${ipnum}
+                        echo "IPADDR=${ipv4alias}" >> /etc/sysconfig/network-scripts/ifcfg-eth0:${ipnum}
+                        echo "NETMASK=255.255.255.255" >> /etc/sysconfig/network-scripts/ifcfg-eth0:${ipnum}
                         ipnum=$(expr ${ipnum} + 1)
                 done
         fi
         if [ "($IPv6ALIASES)" != "" ] && [ "($IPv6ALIASES)" != "()" ]; then
-                echo "IPV6ADDR_SECONDARIES=\"($IPv6ALIASES)\"" >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}
+                echo "IPV6ADDR_SECONDARIES=\"($IPv6ALIASES)\"" >> /etc/sysconfig/network-scripts/ifcfg-eth0
         fi
 fi
 
 # DNS start
 if [ "($NAMESERVERS)" != "" ] && [ "($NAMESERVERS)" != "()" ]; then
         nslist="($NAMESERVERS)"
-        sed -i -r '/DNS1=/d' /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}
+        sed -i -r '/DNS1=/d' /etc/sysconfig/network-scripts/ifcfg-eth0
         num=0
         for ns in ${nslist}; do
                 num=$((num + 1))
-                echo "DNS${num}=${ns}" >> /etc/sysconfig/network-scripts/ifcfg-${ETHDEV}
+                echo "DNS${num}=${ns}" >> /etc/sysconfig/network-scripts/ifcfg-eth0
         done
 fi
 # DNS end
