@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <osname>BitrixEnv-7-amd64_ext4_img</osname>
-    <tags>centos,linux,unix</tags>
+    <tags>centos7,centos,bitrix</tags>
     <illegal_password_characters>!@#$%^&amp;*()</illegal_password_characters>
     <limit>
         <elem name="ipv4">yes</elem>
