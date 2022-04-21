@@ -11,7 +11,7 @@
 
 ```bash
 yum install -y epel-release
-yum install -y cloud-utils-growpart bind-utils traceroute bash-completion bash-completion-extras nano ncdu net-tools wget byobu
+yum install -y cloud-utils-growpart bind-utils traceroute bash-completion bash-completion-extras nano ncdu net-tools wget byobu deltarpm
 ```
 
 Пример для Ubuntu 18.04 / 20.04  
