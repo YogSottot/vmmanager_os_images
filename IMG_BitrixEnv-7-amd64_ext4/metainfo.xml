@@ -7,7 +7,7 @@
         <elem name="ipv4">yes</elem>
         <elem name="ipv6">yes</elem>
         <elem name="mem">512</elem>
-        <elem name="disk">3300</elem>
+        <elem name="disk">3400</elem>
     </limit>
     <support>
         <elem version="5.4.0">VMmgr</elem>
