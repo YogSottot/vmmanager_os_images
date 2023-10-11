@@ -42,7 +42,7 @@ chmod +x /etc/rc.local
 
 ```bash
 # Мой пример
-dd if=/dev/virtual/vm6889  of=/nfsshare/IMG_BitrixEnv-7-amd64_ext4/bitrixenv_7_hdd.image bs=16M
+dd if=/dev/virtual/vm6889  of=/nfsshare/IMG_BitrixEnv-7-amd64_ext4/bitrixenv_7_hdd.image bs=16M status=progress
 
 # Из документации vmmanger  
 # Для LVM
