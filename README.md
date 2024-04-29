@@ -8,6 +8,7 @@
 Для использования шаблонов нужно создать образы дисков. Для этого, используя стандартные шаблоны vmmanger, устанавливаем нужную ОС, задавая размер диска указанный в шаблоне параметром ```<elem name="disk">```.  
 Устанавливаем туда нужные программы. Пакеты ```cloud-utils-growpart``` / ```cloud-guest-utils``` необходимы для работы скрипта, остальное опционально.  
 Установку лучше производить на первом узле кластера.  
+
 Пример для CentOS 7  
 
 ```bash
@@ -81,6 +82,9 @@ ln -f $GIT_DIR/../IMG_Ubuntu-18.04-amd64/install.sh /nfsshare/IMG_Ubuntu-18.04-a
 
 ln -f $GIT_DIR/../IMG_Ubuntu-20.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-20.04-amd64/
 ln -f $GIT_DIR/../IMG_Ubuntu-20.04-amd64/install.sh /nfsshare/IMG_Ubuntu-20.04-amd64/
+
+ln -f $GIT_DIR/../IMG_Ubuntu-24.04-amd64/metainfo.xml /nfsshare/IMG_Ubuntu-24.04-amd64/
+ln -f $GIT_DIR/../IMG_Ubuntu-24.04-amd64/install.sh /nfsshare/IMG_Ubuntu-24.04-amd64/
 
 ln -f $GIT_DIR/../IMG_Debian-10-amd64/metainfo.xml /nfsshare/IMG_Debian-10-amd64/
 ln -f $GIT_DIR/../IMG_Debian-10-amd64/install.sh /nfsshare/IMG_Debian-10-amd64/

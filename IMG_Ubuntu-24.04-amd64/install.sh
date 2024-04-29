@@ -37,7 +37,7 @@ resize_fs() {
  
 case "\$1" in
         start|reload)
-                resize2fs /dev/vda2
+                resize2fs /dev/vda1
                 update-rc.d -f resize_fs remove
                 rm -f /etc/init.d/resize_fs
                 exit 0
