@@ -137,4 +137,5 @@ dd if=ubuntu-24.04-test.raw of=/dev/virtual/vm54445_min bs=16M status=progress
 
 ```bash
 echo "network: {config: disabled}" > /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+echo "PermitRootLogin yes" > /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
 ```
