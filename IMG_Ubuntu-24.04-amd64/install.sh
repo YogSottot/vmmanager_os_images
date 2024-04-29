@@ -1,5 +1,6 @@
-#!/bin/bash
- 
+#!/usr/bin/env bash
+set -eo pipefail
+
 clean_files() {
         # remove old ssh-keys
         rm -f /etc/ssh/*key*
@@ -33,7 +34,7 @@ resize_fs() {
 # Provides:             resize_fs
 ### END INIT INFO
  
-. /etc/init.d/functions
+. /lib/lsb/init-functions
  
 case "\$1" in
         start|reload)
@@ -65,7 +66,7 @@ network_configure() {
 
         HSHORT=$(echo "($HOSTNAME)" | cut -d. -f1)
         HSLAST=$(echo "($HOSTNAME)" | sed "s/${HSHORT}\.//")
-        hostnamectl hostname "${$HOSTNAME}"
+        hostnamectl hostname "${HOSTNAME}"
         #echo "${HSHORT}" > /etc/hostname
         #sed -r -i "s/search.*/search ${HSLAST}/" /run/systemd/resolve/resolv.conf
         #sed -r -i "s/search.*/search ${HSLAST}/" /run/systemd/resolve/stub-resolv.conf
@@ -92,7 +93,7 @@ EOF
         fi
 
 
-        ETHDEV=$(ip route show | grep default | grep -Eo 'dev\ .+\ ' | awk '{print $2}'| head -1)
+        ETHDEV=$(ip link | awk -F: '$0 !~ "lo|vir|^[^0-9]"{print $2a;getline}')
         #HWADDR=$(ip link show ${ETHDEV} | awk '/link\/ether/ {print $2}' | tr [:lower:] [:upper:])
         #UUID=$(uuidgen ${ETHDEV})
 
@@ -124,7 +125,7 @@ EOF
                         #echo "auto ${ETHDEV}" >> /etc/network/interfaces
                         #echo "allow-hotplug ${ETHDEV}" >> /etc/network/interfaces
                 fi
-                cat > /etc/netplan/50-cloud-init.yaml << EOT
+                cat > /etc/netplan/50-cloud-init.yaml << EOF
                 network:
                     ethernets:
                         ${ETHDEV}:
@@ -141,7 +142,7 @@ EOF
                             -   to: default
                                 via: ${GATEWAY}
                     version: 2
-EOT
+EOF
 
         fi
         if [ "($NEXTHOPIPv4)" != "" ] && [ "($NEXTHOPIPv4)" != "()" ] && [ "($IP)" != "($IPv6)" ]; then
@@ -162,7 +163,7 @@ EOT
         fi
 
         if [ "($IP)" != "($IPv6)" ]; then
-        cat > /etc/netplan/50-cloud-init.yaml << EOT
+        cat > /etc/netplan/50-cloud-init.yaml << EOF
         network:
             ethernets:
                 ${ETHDEV}:
@@ -179,7 +180,7 @@ EOT
                     -   to: default
                         via: ${GATEWAY}
             version: 2
-EOT
+EOF
         fi
 
         if [ "${MULTIIP}" = "true" ]; then \
