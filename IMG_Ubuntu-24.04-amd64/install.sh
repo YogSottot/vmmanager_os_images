@@ -124,7 +124,7 @@ EOF
                         #echo "auto ${ETHDEV}" >> /etc/network/interfaces
                         #echo "allow-hotplug ${ETHDEV}" >> /etc/network/interfaces
                 fi
-                cat > /etc/netplan/50-cloud-init.yaml << EOF
+                cat > /etc/netplan/50-cloud-init.yaml << EOT
                 network:
                     ethernets:
                         ${ETHDEV}:
@@ -142,6 +142,7 @@ EOF
                                 via: ${GATEWAY}
                     version: 2
 EOT
+
         fi
         if [ "($NEXTHOPIPv4)" != "" ] && [ "($NEXTHOPIPv4)" != "()" ] && [ "($IP)" != "($IPv6)" ]; then
                 echo "# The loopback network interface" > /etc/network/interfaces
@@ -214,11 +215,6 @@ EOT
 # restart network
 netplan apply
 #systemctl restart systemd-networkd
-
-# edit /etc/networks
-#NETWORK=$(echo ($IP) | sed 's/[^.]*$/0/')
-#sed -i -r "s/localnet.*/localnet ${NETWORK}/" /etc/networks
-
 }
 
 ssh_keys_add() {
