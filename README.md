@@ -2,7 +2,7 @@
 
 Создано на основе [официального руководства](https://docs.ispsystem.ru/vmmanager-kvm/shablony-os-i-retsepty/shablony-os/sozdanie-shablonov-os#id-%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D0%BE%D0%B2%D0%9E%D0%A1-CentOS%D1%81%D1%80%D0%B0%D0%B7%D0%B2%D0%BE%D1%80%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC%D0%B8%D0%B7%D1%84%D0%B0%D0%B9%D0%BB%D0%B0)
 
-Созданы шаблоны для CentOS 7, Ubuntu 18.04 / 20.04, Debian 10 / 11  
+Созданы шаблоны для CentOS 7, Ubuntu 18.04 / 20.04 / 24.04 , Debian 10 / 11  
 
 Директории шаблонов копируются в /nfsshare/  
 Для использования шаблонов нужно создать образы дисков. Для этого, используя стандартные шаблоны vmmanger, устанавливаем нужную ОС, задавая размер диска указанный в шаблоне параметром ```<elem name="disk">```.  
@@ -91,3 +91,45 @@ ln -f $GIT_DIR/../IMG_Debian-11-amd64/install.sh /nfsshare/IMG_Debian-11-amd64/
 
 При ```git pull``` скрипты будут обновляться на новую версию.  
 Директории в ```/nfsshare/``` нужно предварительно создать.
+
+##### Ubuntu 24.04 / нет в репозитори vmmanager 5  
+
+Для установки использован minimal образ  
+http://cloud-images.ubuntu.com/minimal/releases/noble/  
+
+Сконвертировать из qcow2 в raw  
+
+```bash
+qemu-img convert ubuntu-24.04-minimal-cloudimg-amd64.img ubuntu-24.04-minimal-cloudimg-amd64.raw
+```
+
+Поменять пароль для первоначального входа  
+
+```bash
+virt-customize -a ubuntu-24.04-minimal-cloudimg-amd64.raw --root-password password:<password>
+```
+
+Размер raw образа ubuntu — 3,5 Gb Реально занято у ubuntu — 508 Mb.
+Уменьшаем размер фс и раздела например в gparted live (boot - 256 Mb / root - до минимума). Потом уменьшаем размер диска  
+Смотрим размер фс в parted print. Вычисляем разницу и уменьшаем  
+
+```bash
+qemu-img resize -f raw --shrink ubuntu-24.04-test.raw -2160M
+```
+
+Исправляем gpt  
+https://patrakov.blogspot.com/2019/01/resizing-linux-virtual-machine-disks.html  
+
+```bash
+growpart ubuntu-24.04-test.raw 1
+```
+
+Переносим в vm для проверки  
+
+```bash
+dd if=ubuntu-24.04-test.raw of=/dev/virtual/vm54445_min bs=16M status=progress
+```
+
+```bash
+echo "network: {config: disabled}" > /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+```
