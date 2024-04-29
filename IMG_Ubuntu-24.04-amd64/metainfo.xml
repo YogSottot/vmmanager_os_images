@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <doc>
-    <osname>BitrixEnv-7-amd64_ext4_img</osname>
-    <tags>centos,bitrix</tags>
+    <osname>Ubuntu-24.04-amd64_img</osname>
+    <tags>ubuntu,linux,unix,ubuntu2404,noble</tags>
     <illegal_password_characters>!@#$%^&amp;*()</illegal_password_characters>
     <limit>
         <elem name="ipv4">yes</elem>
         <elem name="ipv6">yes</elem>
-        <elem name="mem">512</elem>
-        <elem name="disk">3700</elem>
+        <elem name="mem">256</elem>
+        <elem name="disk">1425</elem>
     </limit>
     <support>
         <elem version="5.4.0">VMmgr</elem>
     </support>
-    <hddimage>bitrixenv_7_hdd.image</hddimage>
+    <hddimage>ubuntu_24.04_hdd.image</hddimage>
     <rebootcount>1</rebootcount>
     <type>ostemplate</type>
     <installdrive>install.sh</installdrive>
