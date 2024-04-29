@@ -7,6 +7,7 @@
 Директории шаблонов копируются в /nfsshare/  
 Для использования шаблонов нужно создать образы дисков. Для этого, используя стандартные шаблоны vmmanger, устанавливаем нужную ОС, задавая размер диска указанный в шаблоне параметром ```<elem name="disk">```.  
 Устанавливаем туда нужные программы. Пакеты ```cloud-utils-growpart``` / ```cloud-guest-utils``` необходимы для работы скрипта, остальное опционально.  
+Установку лучше производить на первом узле кластера.  
 Пример для CentOS 7  
 
 ```bash
@@ -42,7 +43,7 @@ chmod +x /etc/rc.local
 
 ```bash
 # Мой пример
-dd if=/dev/virtual/vm6889  of=/nfsshare/IMG_BitrixEnv-7-amd64_ext4/bitrixenv_7_hdd.image bs=16M
+dd if=/dev/virtual/vm6889  of=/nfsshare/IMG_BitrixEnv-7-amd64_ext4/bitrixenv_7_hdd.image bs=16M status=progress
 
 # Из документации vmmanger  
 # Для LVM
