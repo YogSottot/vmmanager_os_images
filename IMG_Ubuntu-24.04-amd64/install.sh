@@ -162,7 +162,7 @@ EOT
         fi
 
         if [ "($IP)" != "($IPv6)" ]; then
-        cat > /etc/netplan/50-cloud-init.yaml << EOF
+        cat > /etc/netplan/50-cloud-init.yaml << EOT
         network:
             ethernets:
                 ${ETHDEV}:
