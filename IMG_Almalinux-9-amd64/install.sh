@@ -97,9 +97,11 @@ EOF
 
 
         ETHDEV=$(ip link | awk -F: '$0 !~ "lo|vir|^[^0-9]"{print $2a;getline}')
-        HWADDR=$(ip link show ${ETHDEV} | awk '/link\/ether/ {print $2}' | tr [:lower:] [:upper:])
-        UUID=$(uuidgen ${ETHDEV})
-
+        HWADDR=$(ip link show "${ETHDEV}" | awk '/link\/ether/ {print $2}' | tr [:lower:] [:upper:])
+        UUID=$(uuidgen "${ETHDEV}")
+        touch /etc/NetworkManager/system-connections/"${ETHDEV}".nmconnection
+        chmod 600 /etc/NetworkManager/system-connections/"${ETHDEV}".nmconnection
+        nmcli c delete Wired\ connection\ 1
 
 if [ "($TMPIPv4)" != "" ] && [ "($TMPIPv4)" != "()" ]; then
         # Это новая схема, тут могут быть 2 ip адреса
@@ -124,8 +126,7 @@ if [ -n "($IPv6)" ]; then
                 # либо старая схема, либо временный IPv4
                 echo "NETWORKING=yes" > /etc/sysconfig/network
                 echo "HOSTNAME=($HOSTNAME)" >> /etc/sysconfig/network
-
-                cat > /etc/NetworkManager/system-connections/${ETHDEV}.nmconnection << EOF
+                cat > /etc/NetworkManager/system-connections/"${ETHDEV}".nmconnection << EOF
 [connection]
 id=${ETHDEV}
 uuid=${UUID}
@@ -169,7 +170,7 @@ EOF
 fi
 
 if [ "($NEXTHOPIPv4)" != "" ] && [ "($NEXTHOPIPv4)" != "()" ] && [ "($IP)" != "($IPv6)" ]; then
-                cat > /etc/NetworkManager/system-connections/${ETHDEV}.nmconnection << EOF
+                cat > /etc/NetworkManager/system-connections/"${ETHDEV}".nmconnection << EOF
 [connection]
 id=${ETHDEV}
 uuid=${UUID}
