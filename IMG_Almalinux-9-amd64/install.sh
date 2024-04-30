@@ -8,7 +8,7 @@ clean_files() {
  
  
 disk_format() {
-        growpart /dev/vda 2 -u auto
+        growpart /dev/vda 1 -u auto
 }
 
 resize_fs() {
@@ -31,7 +31,7 @@ resize_fs() {
  
 case "\$1" in
         start|reload)
-                resize2fs /dev/vda2
+                resize2fs /dev/vda1
                 chkconfig --del resize_fs
                 rm -f /etc/init.d/resize_fs
                 exit 0
