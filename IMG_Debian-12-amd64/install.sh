@@ -68,9 +68,10 @@ network_configure() {
         HSHORT=$(echo "($HOSTNAME)" | cut -d. -f1)
         HSLAST=$(echo "($HOSTNAME)" | sed "s/${HSHORT}\.//")
         echo "${HSHORT}" > /etc/hostname
+        hostnamectl hostname "${HOSTNAME}"
         #sed -r -i "s/search.*/search ${HSLAST}/" /run/systemd/resolve/resolv.conf
         #sed -r -i "s/search.*/search ${HSLAST}/" /run/systemd/resolve/stub-resolv.conf
-        sed -r -i "s/search.*/search ${HSLAST}/" /etc/resolv.conf
+        #sed -r -i "s/search.*/search ${HSLAST}/" /etc/resolv.conf
         #sed -i -r "s/Domains=.*/Domains=${HSLAST}/" /etc/systemd/resolved.conf
 
         if [ "($NAMESERVERS)" != "" ] && [ "($NAMESERVERS)" != "()" ]; then
