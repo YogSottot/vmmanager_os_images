@@ -96,7 +96,7 @@ EOF
 # EOF
 
 
-        ETHDEV=$(ip link | awk -F: '$0 !~ "lo|vir|^[^0-9]"{print $2a;getline}')
+        ETHDEV=$(ip link | awk -F: '$0 !~ "lo|vir|^[^0-9]"{print $2a;getline}' | awk '{print $NF}')
         HWADDR=$(ip link show "${ETHDEV}" | awk '/link\/ether/ {print $2}' | tr [:lower:] [:upper:])
         UUID=$(uuidgen "${ETHDEV}")
         touch /etc/NetworkManager/system-connections/"${ETHDEV}".nmconnection
