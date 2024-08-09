@@ -2,7 +2,7 @@
 
 ##### Added  
 
-Добавлен шаблоны IMG_Debian-12-amd64 и Almalinux-9-amd64
+Добавлен шаблоны IMG_Debian-12-amd64 и Almalinux-9-amd64 (nmcli -f NAME,DEVICE,FILENAME connection show)  
 
 #### 2024.04.29  
 
